@@ -10,3 +10,16 @@ services:
       MYSQL_USER: test
       MYSQL_PASSWORD: 1234
       MYSQL_ROOT_PASSWORD: 1234
+  app:
+    image: backend
+    build: .
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: mysql
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3311/spring_batch
+      SPRING_DATASOURCE_USERNAME: test
+      SPRING_DATASOURCE_PASSWORD: 1234
+    depends_on:
+      - db
